@@ -110,21 +110,19 @@ public class ApiTest {
                         "message", equalTo("User successfully removed"));
     }
 
-    protected LoginResponseVO login(String email, String password, String accessToken) {
-        return login(email, password, accessToken, true, SC_OK);
+    protected LoginResponseVO login(String email, String password) {
+        return login(email, password, true, SC_OK);
     }
 
     protected LoginResponseVO login(
             String email,
             String password,
-            String accessToken,
             boolean expectedSuccess,
             int expectedCode) {
         LoginResponseVO response = given()
                 .contentType(JSON)
                 .log().method().log().uri().log().body().log().headers()
                 .when()
-                .header("Authorization", accessToken)
                 .body(LoginRequestVO.builder()
                         .email(email)
                         .password(password)

@@ -221,6 +221,6 @@ public class UpdateUserTest extends ApiTest {
         CreateUserResponseVO createUserResponseVO = createUser(email, password, name);
         assertThat(createUserResponseVO.getUser())
                 .isEqualTo(User.of(email, name));
-        return login(email, password, accessToken);
+        return login(email, password);
     }
 }

@@ -33,7 +33,7 @@ public class LoginTest extends ApiTest {
         createUser(email, password, name);
 
         // when
-        LoginResponseVO response = login(email, password, accessToken);
+        LoginResponseVO response = login(email, password);
 
         // then
         assertThat(response.getUser())
@@ -44,7 +44,7 @@ public class LoginTest extends ApiTest {
     @DisplayName("non existing user login")
     public void nonExistingUserLogin() {
         // when
-        LoginResponseVO response = login(email, password, "", false, SC_UNAUTHORIZED);
+        LoginResponseVO response = login(email, password, false, SC_UNAUTHORIZED);
 
         // then
         assertThat(response.getMessage())
@@ -58,10 +58,10 @@ public class LoginTest extends ApiTest {
         CreateUserResponseVO user = createUser(email, password, name);
 
         // when
-        login(email, password, accessToken);
+        login(email, password);
         deleteUser(accessToken);
         accessToken = null;
-        LoginResponseVO response = login(email, password, user.getAccessToken(), false, SC_UNAUTHORIZED);
+        LoginResponseVO response = login(email, password, false, SC_UNAUTHORIZED);
 
         // then
         assertThat(response.getMessage())
@@ -76,7 +76,7 @@ public class LoginTest extends ApiTest {
         createUser(email, password, name);
 
         // when
-        LoginResponseVO response = login(null, password, accessToken, false, SC_UNAUTHORIZED);
+        LoginResponseVO response = login(null, password, false, SC_UNAUTHORIZED);
 
         // then
         assertThat(response.getMessage())
@@ -91,7 +91,7 @@ public class LoginTest extends ApiTest {
         createUser(email, password, name);
 
         // when
-        LoginResponseVO response = login(email, null, accessToken, false, SC_UNAUTHORIZED);
+        LoginResponseVO response = login(email, null, false, SC_UNAUTHORIZED);
 
         // then
         assertThat(response.getMessage())
